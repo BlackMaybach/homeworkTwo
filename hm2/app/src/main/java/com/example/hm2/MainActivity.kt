@@ -38,8 +38,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnFor.setOnClickListener() {
+
             val text = editText.text.toString()
-            val result = getValueUsingFor(text)
+            getValueUsingFor(text)
+
+            if(text.trim().isEmpty()) {
+                Toast.makeText(this, "Введите данные", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -65,7 +70,6 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("INDEX", array.indexOf(i))
                 startActivity(intent)
             }
-            else if (text.isNullOrEmpty()) Toast.makeText(this, "Введите данные", Toast.LENGTH_SHORT).show()
         }
     }
 }
