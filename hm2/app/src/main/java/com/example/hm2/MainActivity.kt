@@ -26,40 +26,42 @@ class MainActivity : AppCompatActivity() {
         btnWhile.setOnClickListener() {
             val text = editText.text.toString()
             val result = getValueUsingWhile(text)
-            val intent = Intent(this, ResultActivity::class.java)
 
-            if(text.trim().isEmpty()) {
+            if(result == null) {
                 Toast.makeText(this, "Введите данные", Toast.LENGTH_SHORT).show()
-            }
-            else {
+            } else {
+                val intent = Intent(this, ResultActivity::class.java)
                 intent.putExtra("result", result)
                 startActivity(intent)
             }
         }
 
-        btnFor.setOnClickListener() {
 
+        btnFor.setOnClickListener() {
             val text = editText.text.toString()
-            getValueUsingFor(text)
 
             if(text.trim().isEmpty()) {
                 Toast.makeText(this, "Введите данные", Toast.LENGTH_SHORT).show()
+            } else {
+                getValueUsingFor(text)
             }
         }
     }
 
     fun getValueUsingWhile(text: String): String? {
-
         var index = 0
 
         while (index < array.size) {
             if(text == array[index]) {
                 return "$text : $index"
+            } else if (text != array[index]) {
+                return "Такого значения нет в массиве"
             }
             ++index
         }
         return null
     }
+
 
     fun getValueUsingFor(text: String) {
 
@@ -69,6 +71,9 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("TEXT", text)
                 intent.putExtra("INDEX", array.indexOf(i))
                 startActivity(intent)
+            }
+            else if (i != text) {
+                Toast.makeText(this, "Такого значения нет в массиве", Toast.LENGTH_SHORT).show()
             }
         }
     }
